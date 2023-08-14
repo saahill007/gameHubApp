@@ -7,12 +7,14 @@ import { useState } from "react";
 import { Genre } from "./hooks/useGenres";
 import PlatformSelector from "./Components/PlatformSelector";
 import { Platform } from "./hooks/usePlatforms";
+import GameHeading from "./Components/GameHeading";
 
 function App() {
   const [selectGenre, updateSelectedGenre] = useState<Genre | null>(null);
   const [selectedPlatform, updateSelectedPlatform] = useState<Platform | null>(
     null
   );
+  const [searchString, updateSearchString] = useState("");
   return (
     <>
       <Grid
@@ -22,7 +24,12 @@ function App() {
         }}
       >
         <GridItem area={"nav"}>
-          <NavBar />
+          <NavBar
+            onSearch={(str) => {
+              updateSearchString(str);
+              console.log(searchString);
+            }}
+          />
         </GridItem>
         <Show above="lg">
           <GridItem area={"aside"} paddingX={5}>
@@ -37,6 +44,10 @@ function App() {
         </Show>
 
         <GridItem area={"main"}>
+          <GameHeading
+            genre={selectGenre}
+            platform={selectedPlatform}
+          ></GameHeading>
           <PlatformSelector
             onselectPlatform={(platform: Platform) =>
               updateSelectedPlatform(platform)
@@ -46,6 +57,7 @@ function App() {
           <GameGrid
             selectedPlatform={selectedPlatform}
             selectedGenre={selectGenre}
+            selectedString={searchString}
           />
         </GridItem>
       </Grid>

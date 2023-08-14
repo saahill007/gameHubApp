@@ -18,8 +18,8 @@ export interface Game {
     metacritic:number;
   }
 
-const useGames = (selectedGenre:Genre |null, selectedPlatform:Platform | null) => {
-    const {data,error,isLoading} = useData<Game>("/games",{params:{genres:selectedGenre?.id, platforms:selectedPlatform?.id}}, [selectedGenre?.id,selectedPlatform?.id]);
+const useGames = (selectedGenre:Genre |null, selectedPlatform:Platform | null,selectedString:string) => {
+    const {data,error,isLoading} = useData<Game>("/games",{params:{genres:selectedGenre?.id, platforms:selectedPlatform?.id, search:selectedString}}, [selectedGenre?.id,selectedPlatform?.id,selectedString]);
   return {data,error,isLoading}
 }
 
