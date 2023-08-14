@@ -1,5 +1,3 @@
-import React from "react";
-
 const getCroppedImages = (url: string) => {
   const target = "media/";
   const index = url.indexOf(target) + target.length;
